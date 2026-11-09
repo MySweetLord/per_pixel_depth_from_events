@@ -1,0 +1,17 @@
+_target_: depth_from_events.mvsec.MvsecDataModule
+root_dir: ${data_roots.${data_source}}
+time_window:      0.02                            # 20ms in s
+train_seq_len:    100
+train_recordings: [outdoor_day1, indoor_flying1]
+train_time:       [[45, 650]]                     # skip initial and final static part
+train_crop:       [0, 1, 192, 345]                # [2, 1, 258, 345] for /8; hw for random, tlbr or null for fixed
+val_recordings:   [outdoor_day1, indoor_flying2]  # default: outdoor_day1
+val_time:         [null]                          # full seq instead of seconds 222.4-240.4
+val_crop:         [0, 1, 192, 345]                # [0, 1, 192, 345] for only above car bonnet
+rectify:          true
+augmentations:    [polarity, horizontal]
+return_events:    true                            # always
+batch_size:       8
+shuffle:          true
+num_workers:      8
+download:         false                           # don't check downloads

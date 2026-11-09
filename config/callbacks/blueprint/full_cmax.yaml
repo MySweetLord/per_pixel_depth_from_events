@@ -1,0 +1,43 @@
+_target_: rerun.blueprint.Blueprint
+_args_:
+  - _target_: rerun.blueprint.Vertical
+    contents:
+      - _target_: rerun.blueprint.Horizontal
+        contents:
+          - _target_: rerun.blueprint.Spatial2DView
+            name: events
+            origin: /${stage}/events
+          - _target_: rerun.blueprint.Spatial2DView
+            name: flow
+            origin: /${stage}/flow
+          - _target_: rerun.blueprint.Spatial2DView
+            name: disparity
+            origin: /${stage}/disparity
+          # - _target_: rerun.blueprint.Spatial2DView
+          #   name: disparity_pred
+          #   origin: /${stage}/disparity_pred
+      - _target_: rerun.blueprint.Horizontal
+        contents:
+          - _target_: rerun.blueprint.Spatial2DView
+            name: accumulated_events
+            origin: /${stage}/cmax_accumulated_events
+          - _target_: rerun.blueprint.Spatial2DView
+            name: warped_events_0
+            origin: /${stage}/cmax_image_warped_events_0
+          - _target_: rerun.blueprint.Spatial2DView
+            name: warped_events_t
+            origin: /${stage}/cmax_image_warped_events_t
+      - _target_: rerun.blueprint.Horizontal
+        contents:
+          # - _target_: rerun.blueprint.Spatial3DView
+          #   name: pose
+          #   origin: /${stage}/pose
+          - _target_: rerun.blueprint.TimeSeriesView
+            name: metrics
+            origin: /${stage}
+          - _target_: rerun.blueprint.Spatial2DView
+            name: disparity_gt
+            origin: /${stage}/disparity_gt
+          # - _target_: rerun.blueprint.Spatial2DView
+          #   name: color_gt
+          #   origin: /${stage}/color_gt

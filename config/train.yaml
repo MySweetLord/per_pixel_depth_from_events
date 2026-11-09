@@ -1,0 +1,24 @@
+defaults:
+  - data_paths
+  - datamodule: mvsec
+  - litmodule: train
+  - network: depth_pose
+  - transform: depth_to_flow
+  - loss_functions@loss_functions.train:
+    - cmax_iter
+    - scale_consistency
+  - loss_functions@loss_functions.validate:
+    - cmax_iter
+    - rsat
+    - depth_disparity
+  - optimizer: adam
+  - scheduler: nothing
+  - trainer: train
+  - callbacks:
+    - checkpoint
+  - logger: csv
+  - hydra: no_logging
+  - _self_
+
+stage: train
+name: ${stage}

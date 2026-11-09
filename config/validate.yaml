@@ -1,0 +1,11 @@
+defaults:
+  - hydra: no_logging
+  - _self_
+
+local_load: checkpoints/local/epoch=0050-step=00018500.ckpt
+
+stage: validate
+name: ${stage}
+local_state_dict: null
+
+deletes: []

@@ -1,0 +1,11 @@
+checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: checkpoints/run1
+  filename: "epoch-{epoch:03d}"
+  every_n_epochs: 10
+  save_top_k: 2
+  save_last: true
+
+progress:
+  _target_: lightning.pytorch.callbacks.TQDMProgressBar  #RichProgressBar
+  refresh_rate: 1

@@ -1,0 +1,5 @@
+data_source: local
+
+data_roots:
+  local: C:/Users/Razer/Documents/ENGINEERING PHYSICS/MSc/MSC THESIS NCS/data/raw/mvsec
+  drive: /content/drive/MyDrive/ENGINEERING AND PHYSICS/MSc Engineering Physics/NCS THESIS PROJECT/hdf5"

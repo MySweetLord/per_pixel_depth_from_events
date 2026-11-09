@@ -1,0 +1,5 @@
+# @package _global_
+logger:
+  _target_: lightning.pytorch.loggers.CSVLogger
+  save_dir: outputs
+  name: training

@@ -1,0 +1,9 @@
+*.egg-info/
+artifacts/
+data/
+logs/
+runs/
+figures/
+/checkpoints/
+__pycache__/
+.vscode/
