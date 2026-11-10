@@ -20,5 +20,5 @@ defaults:
   - hydra: no_logging
   - _self_
 
-stage: train
+stage: train                                # passed to litmodule
 name: ${stage}

@@ -16,18 +16,18 @@ class ContrastMaximization(nn.Module):
     def __init__(self, use_events, accumulation_window, base, keep_warping, num_backprop_events, select):
         super().__init__()
 
-        self.use_events = use_events
+        self.use_events          = use_events
         self.accumulation_window = accumulation_window
-        self.base = base
-        self.keep_warping = keep_warping
+        self.base                = base
+        self.keep_warping        = keep_warping
         self.num_backprop_events = num_backprop_events
-        self.select = select
+        self.select              = select
 
-        self.total_loss = 0
-        self.passes = 0
-        self.event_frames = []
-        self.auxs = []
-        self.flow_maps = []
+        self.total_loss     = 0
+        self.passes         = 0
+        self.event_frames   = []
+        self.auxs           = []
+        self.flow_maps      = []
 
     def forward(self, event_frame, aux, flow_map):
         self.event_frames.append(event_frame[:, :4] if not self.use_events else event_frame[:, :2])
@@ -38,12 +38,12 @@ class ContrastMaximization(nn.Module):
     def prepare_backward(self):
         # extract events
         if not self.use_events:
-            event_frames = torch.stack(self.event_frames, dim=2)  # (b, c, d, h, w)
-            events = extract_events_from_frames(event_frames)  # padded (b, n, 5)
+            event_frames = torch.stack(self.event_frames, dim=2)     # (b, c, d, h, w)
+            events       = extract_events_from_frames(event_frames)  # padded (b, n, 5)
         else:
             counts = [aux["counts"] for aux in self.auxs]
             events = [aux["events"] for aux in self.auxs]
-            events = format_events(events, counts)  # padded (b, n, 5)
+            events = format_events(events, counts)                   # padded (b, n, 5)
 
         # stack flows
         flow_maps = torch.stack(self.flow_maps, dim=2)  # (b, 2, d, h, w)

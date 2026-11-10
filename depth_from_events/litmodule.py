@@ -1,8 +1,6 @@
 from collections import OrderedDict
-
 from lightning import LightningModule
 import torch
-
 from depth_from_events import callbacks
 
 
@@ -10,11 +8,11 @@ class Train(LightningModule):
     def __init__(self, network, transform, loss_functions, optimizer, scheduler):
         super().__init__()
 
-        self.network    = network
-        self.transform  = transform
+        self.network        = network
+        self.transform      = transform
         self.loss_functions = loss_functions
-        self.optimizer = optimizer
-        self.scheduler = scheduler
+        self.optimizer      = optimizer
+        self.scheduler      = scheduler
         self.automatic_optimization = False  # manual because tbptt
 
     def setup(self, stage):
@@ -36,7 +34,6 @@ class Train(LightningModule):
         # b, _, h, w = self.trainer.datamodule.train_frame_shape
         # self.transform.init_grid(b, h, w, self.device, torch.float32)
         # self.transform = torch.compile(self.transform, fullgraph=True, mode="reduce-overhead")
-
 
 
         # set visualization
@@ -68,14 +65,13 @@ class Train(LightningModule):
         # go over sequence
         log_seq = OrderedDict()
         for i, (frame, eof) in enumerate(zip(frames, eofs)):
+
             log_seq[i] = dict()
-            log = log_seq[i]
-            # get auxiliary: events and counts
-            aux = {k: v[i] for k, v in auxs.items()}
+            log        = log_seq[i]
+            aux        = {k: v[i] for k, v in auxs.items()}             # get auxiliary: events and counts
 
             # forward network
-            # if flow net, this is flow; else (depth/disparity, pose)
-            yhat = self.network(frame)
+            yhat = self.network(frame)                                  # if flow net, this is flow; else (depth/disparity, pose)
 
             # transform network output
             if self.transform is not None:
